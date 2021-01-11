@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/hex"
 	"github.com/robloxapi/rbxclip"
-	"github.com/robloxapi/rbxfile/bin"
+	"github.com/robloxapi/rbxfile/rbxl"
 	"testing"
 )
 
@@ -25,7 +25,7 @@ const inputModel = `` +
 func TestFunctions(t *testing.T) {
 	inputBytes, _ := hex.DecodeString(inputModel)
 	inputBuf := bytes.NewBuffer(inputBytes)
-	inputRoot, err := bin.DeserializeModel(inputBuf, nil)
+	inputRoot, err := rbxl.DeserializeModel(inputBuf)
 	if err != nil {
 		t.Fatalf("rbxfile/bin failed to decode file: %s", err)
 	}
@@ -49,7 +49,7 @@ func TestFunctions(t *testing.T) {
 		t.Fatal("Get: expected root")
 	}
 	var buf bytes.Buffer
-	if err := bin.SerializeModel(&buf, nil, root); err != nil {
+	if err := rbxl.SerializeModel(&buf, root); err != nil {
 		t.Fatal("failed to serialize output")
 	}
 	if !bytes.Equal(inputBytes, buf.Bytes()) {

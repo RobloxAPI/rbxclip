@@ -5,7 +5,7 @@ package rbxclip
 import (
 	"bytes"
 	"github.com/robloxapi/rbxfile"
-	"github.com/robloxapi/rbxfile/bin"
+	"github.com/robloxapi/rbxfile/rbxl"
 )
 
 // Get reads instances from the clipboard, decoding them to a rbxfile.Root. A
@@ -17,7 +17,7 @@ func Get() *rbxfile.Root {
 		return nil
 	}
 	buf := bytes.NewBuffer(b)
-	root, err := bin.DeserializeModel(buf, nil)
+	root, err := rbxl.DeserializeModel(buf)
 	if err != nil {
 		return nil
 	}
@@ -39,7 +39,7 @@ func Set(root *rbxfile.Root) bool {
 		return clear() == nil
 	}
 	var buf bytes.Buffer
-	if err := bin.SerializeModel(&buf, nil, root); err != nil {
+	if err := rbxl.SerializeModel(&buf, root); err != nil {
 		return false
 	}
 	clear()
