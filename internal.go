@@ -2,26 +2,22 @@
 
 package rbxclip
 
-func notImplemented() {
-	panic("not implemented")
-}
+import "errors"
+
+var notImplemented = errors.New("not implemented")
 
 func clear() (err error) {
-	notImplemented()
-	return
+	return notImplemented
 }
 
 func has() (available bool, err error) {
-	notImplemented()
-	return
+	return false, notImplemented
 }
 
 func get() (b []byte, err error) {
-	notImplemented()
-	return
+	return nil, notImplemented
 }
 
 func set(b []byte) (err error) {
-	notImplemented()
-	return
+	return notImplemented
 }
